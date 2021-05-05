@@ -55,13 +55,38 @@ function App() {
     "5000000000000000000",
     "100000000000000000",
     "0xA7cAE81fa7edD41F6421Dbe75E3aB73E0cB81B3D",
-    "1620129663").send({to:"0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",from : value,value:await web3.utils.toWei("0.1", "ether")});
+    "1720129663").send({to:"0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",from : value,value:await web3.utils.toWei("0.1", "ether")});
 
    // web3.sendTransaction({to:receiver, from:sender, value:web3.toWei("0.1", "ether")})
     console.log(value);
     return setliquidity;
     
   }
+
+  async function addliquiditypairs(){
+    // const provider = await detectEthereumProvider();
+    // const web3=new Web3(provider)
+    const contractAddress = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D";
+    const contract = await new window.web3.eth.Contract(
+      Router,
+      contractAddress
+    );
+    
+    const setliquiditypairs = await contract.methods.addLiquidity("0x9a37B5fAaD7c433ab87B8abA33aF2AC4015A63db",
+    "0xA0268bb52344b3E5EDcfbB522B9e4C0a475e6632",
+    "1000000000000000000",
+    "1000000000000000000",
+    "1000000000000000000",
+    "1000000000000000000",
+    "0xA7cAE81fa7edD41F6421Dbe75E3aB73E0cB81B3D",
+    "1720212441").send({from : value});
+
+   // web3.sendTransaction({to:receiver, from:sender, value:web3.toWei("0.1", "ether")})
+    console.log(value);
+    return setliquiditypairs;
+    
+  }
+  
 
   return (
     <div className="App">
@@ -74,6 +99,17 @@ function App() {
       <input type="number" placeholder="amount eth min" /><br/>
       <input type="text" placeholder="to"/><br/>
       <button onClick={() => addliquidity()}>Add liquidity</button>
+      <h3>Add liquidity Pairs</h3>
+      <input type="text" placeholder="token A"/><br/>
+      <input type="text" placeholder="token B"/><br/>
+      <input type="number" placeholder="amount A Desired"/><br/>
+      <input type="number" placeholder="amount B Desired" /><br/>
+      <input type="number" placeholder="amountAmin"/><br/>
+      <input type="number" placeholder="amountBmin"/><br/>
+      <input type="text" placeholder="address" /><br/>
+
+
+      <button onClick={() => addliquiditypairs()}>Add liquidity pairs</button>
     </div>
   );
 }
